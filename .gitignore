@@ -3,4 +3,4 @@
 .clangd
 compile_commands.json
 scan.cpp
-/include/credential.h
+/include/credentials.h
