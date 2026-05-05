@@ -3,8 +3,9 @@
 
 #include <Arduino.h>
 
-// These are the functions main.cpp is allowed to use
 void initDisplay();
+/* @brief adaas
+*/
 void showWiFiStatus(bool connected);
 void showSensorError();
 void showCalibrationMessage(unsigned long currentMillis);
