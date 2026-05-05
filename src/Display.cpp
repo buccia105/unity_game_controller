@@ -21,7 +21,7 @@ unsigned long messageClearTime = 0;
 // initialization function
 void initDisplay() {
     tft.init(240, 320);
-    tft.setRotation(1);
+    tft.setRotation(2);
     tft.fillScreen(ST77XX_BLACK);
     
     tft.setTextColor(ST77XX_CYAN);
@@ -66,9 +66,9 @@ void showSensorError() {
 
 // calibration
 void showCalibrationMessage(unsigned long currentMillis) {
-    tft.fillRect(0, 180, 240, 40, ST77XX_BLACK);
+    tft.fillRect(0, 240, 240, 40, ST77XX_BLACK);
     tft.setTextColor(ST77XX_GREEN);
-    tft.setCursor(50, 190);
+    tft.setCursor(35, 240);
     tft.print("CALIBRATED!");
     messageClearTime = currentMillis + 2000;
 }
@@ -97,7 +97,7 @@ void updateDisplayValues(float targetPitch, float targetRoll) {
 // clear old data
 void handleDisplayTasks(unsigned long currentMillis) {
     if (messageClearTime > 0 && currentMillis > messageClearTime) {
-        tft.fillRect(0, 180, 240, 40, ST77XX_BLACK);
+        tft.fillRect(0, 240, 240, 40, ST77XX_BLACK);
         messageClearTime = 0;
     }
 }
