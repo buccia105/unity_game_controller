@@ -1,4 +1,5 @@
 #include "Display.h"
+#include "Dashboard.h"
 #include <SPI.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_ST7789.h>
@@ -7,6 +8,11 @@
 #define TFT_CS D7
 #define TFT_DC D6
 #define TFT_RST D3
+
+// input smoothing variables for the wireframe
+float smoothPitch = 0.0f;
+float smoothRoll = 0.0f;
+const float smoothingFactor = 0.2f;
 
 // creating the display
 Adafruit_ST7789 tft = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
@@ -34,6 +40,8 @@ void initDisplay() {
     tft.setTextColor(ST77XX_WHITE);
     tft.setCursor(10, 150);
     tft.print("WiFi Connecting...");
+
+    initDashboard();
 }
 
 // printing wifi status
@@ -66,13 +74,24 @@ void showCalibrationMessage(unsigned long currentMillis) {
 }
 
 // data showing
-void updateDisplayValues(float pitch, float roll) {
-    tft.setTextColor(ST77XX_WHITE, ST77XX_BLACK); 
+void updateDisplayValues(float targetPitch, float targetRoll) {
+    
+    // input smoothing using linear interpolation
+    smoothPitch = (smoothPitch * (1.0f - smoothingFactor)) + (targetPitch * smoothingFactor);
+    smoothRoll  = (smoothRoll  * (1.0f - smoothingFactor)) + (targetRoll  * smoothingFactor);
+
+    // text formatting 
+    tft.setTextColor(ST77XX_WHITE, ST77XX_BLACK);
     tft.setTextSize(3);
-    tft.setCursor(100, 55); 
-    tft.printf("%+.2f ", pitch); 
+
+    tft.setCursor(100, 55);
+    tft.printf("%+.2f ", smoothPitch);
+
     tft.setCursor(100, 95);
-    tft.printf("%+.2f ", roll);
+    tft.printf("%+.2f ", smoothRoll);
+
+    // graphics update
+    drawDashboard(&tft, smoothPitch, smoothRoll);
 }
 
 // clear old data
