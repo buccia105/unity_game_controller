@@ -1,0 +1,6 @@
+.pio
+.cache
+.clangd
+compile_commands.json
+scan.cpp
+/include/credential.h
