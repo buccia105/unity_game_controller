@@ -1,35 +1,35 @@
 # Unity Game Controller (Hardware Firmware)
 
-Questo progetto contiene il firmware per un controller fisico basato su microcontrollore (ESP32/ESP8266), sviluppato con **PlatformIO**. Il dispositivo è progettato per inviare segnali di input a un'applicazione Unity tramite rete o protocollo seriale.
+This project contains the firmware for a physical game controller based on a microcontroller (ESP32/ESP8266), developed using **PlatformIO**. The device is designed to send input signals to a Unity application via network or serial protocol[cite: 1].
 
-## 🛠️ Stack Tecnologico
-*   **Framework:** Arduino / PlatformIO
-*   **Hardware supportato:** ESP32 / ESP8266
-*   **Linguaggio:** C++ (C# lato Unity)
+## 🛠️ Tech Stack
+*   **Framework:** Arduino / PlatformIO[cite: 1]
+*   **Supported Hardware:** ESP32 / ESP8266[cite: 1]
+*   **Language:** C++ (C# on the Unity side)[cite: 1]
 
-## 📂 Struttura del Progetto
-*   `src/main.cpp`: Logica principale del firmware e gestione degli input fisici.
-*   `include/credentials.h`: Configurazione delle credenziali Wi-Fi (da non pubblicare!).
-*   `platformio.ini`: Configurazione dell'ambiente di build e delle librerie.
-*   `lib/`: Librerie locali specifiche per il controller.
+## 📂 Project Structure
+*   `src/main.cpp`: Main firmware logic and physical input management[cite: 1].
+*   `include/credentials.h`: Wi-Fi credentials configuration (do not publish!)[cite: 1].
+*   `platformio.ini`: Build environment and library configuration[cite: 1].
+*   `lib/`: Local libraries specific to the controller[cite: 1].
 
-## 🚀 Configurazione e Installazione
+## 🚀 Setup and Installation
 
-### 1. Prerequisiti
-Assicurati di avere installato [Visual Studio Code](https://code.visualstudio.com/) con l'estensione **PlatformIO IDE**.
+### 1. Prerequisites
+Ensure you have [Visual Studio Code](https://code.visualstudio.com/) installed with the **PlatformIO IDE** extension[cite: 1].
 
-### 2. Gestione Credenziali
-Il progetto utilizza un sistema di protezione per le credenziali. 
-1. Rinominare il file `include/template_credentials.h` in `include/credentials.h`.
-2. Inserire il proprio SSID e la Password del Wi-Fi all'interno del file.
-   *(Nota: `credentials.h` è già inserito nel `.gitignore` per sicurezza)*.
+### 2. Credentials Management
+The project uses a protection system for sensitive credentials[cite: 1]:
+1. Rename the file `include/template_credentials.h` to `include/credentials.h`[cite: 1].
+2. Enter your Wi-Fi SSID and Password inside the file[cite: 1].
+   *(Note: `credentials.h` is already included in `.gitignore` for security purposes)*[cite: 1].
 
-### 3. Build e Upload
-1. Collega il microcontrollore al computer tramite USB.
-2. Clicca sull'icona della freccia (→) nella barra di stato di PlatformIO per compilare e caricare il codice sulla scheda.
+### 3. Build and Upload
+1. Connect the microcontroller to your computer via USB[cite: 1].
+2. Click the arrow icon (→) in the PlatformIO status bar to compile and upload the code to the board[cite: 1].
 
-## 🕹️ Funzionamento
-Il controller legge i dati dai sensori/pulsanti collegati ai pin del microcontrollore e li impacchetta per essere ricevuti da Unity. Assicurati che l'indirizzo IP del controller e quello del PC dove gira Unity siano sulla stessa sottorete.
+## 🕹️ How it Works
+The controller reads data from sensors or buttons connected to the microcontroller pins and packages them to be received by Unity[cite: 1]. Make sure the controller's IP address and the PC running Unity are on the same subnet[cite: 1].
 
-## 📝 Licenza
-Distribuito sotto licenza MIT. Vedere il file `LICENSE` per dettagli.
+## 📝 License
+Distributed under the MIT License. See the `LICENSE` file for details[cite: 1].
