@@ -22,7 +22,7 @@ float offsetY = 0.0f;
 
 // esp32 touch pin definition
 const int touchPin = 1; 
-const int touchThreshold = 70000; // threashold to detect touch
+const int touchThreshold = 60000; // threashold to detect touch
 
 // timing variables
 unsigned long previousMillis = 0; 
