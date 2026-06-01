@@ -7,6 +7,7 @@
 #include <Adafruit_ADXL375.h>
 
 #include "credentials.h"
+#include "esp32-hal-touch.h"
 
 // osc settings IP and PORT can be defined in the credentials.h
 const char* unityIP = UNITY_IP; 
@@ -22,14 +23,17 @@ float offsetX = 0.0f;
 float offsetY = 0.0f;
 
 // touch button variables
-const int touchPin = 1; 
-const int touchThreshold = 60000; 
+
+const int calibrationTouchPin = D0; // calibration PIN
+const int resetTouchPin = D1; // run reset PIN
+const int touchThreshold = 20000;
 
 // timing variables
 unsigned long previousMillis = 0; 
 const long interval = 20; 
 unsigned long lastTouchTime = 0;
 const long touchCooldown = 1000; 
+unsigned int lastReset = 0;
 
 // wi-fi connection
 bool initOSC() {
@@ -41,9 +45,12 @@ bool initOSC() {
 }
 
 
-bool processOSC(unsigned long currentMillis, float &outPitch, float &outRoll, bool &calibratedJustNow) {
+bool processOSC(unsigned long currentMillis, float &outPitch, float &outRoll, bool &calibratedJustNow, bool &resetJustNow) {
     calibratedJustNow = false;
-    int touchValue = touchRead(touchPin);
+    resetJustNow = false;
+
+    int touchValue = touchRead(calibrationTouchPin);
+    int resetValue = touchRead(resetTouchPin);
 
     // checks if touch value is over the threshold and for the cooldown to end
     if (touchValue > touchThreshold && (currentMillis - lastTouchTime > touchCooldown)) {
@@ -57,6 +64,19 @@ bool processOSC(unsigned long currentMillis, float &outPitch, float &outRoll, bo
         offsetY = event.acceleration.y;
         lastTouchTime = currentMillis; // updating timing variables (to avoid continuos calibration)
         calibratedJustNow = true;
+    }
+
+    // reset logic
+    if (resetValue > touchThreshold && (currentMillis - lastReset > touchCooldown)) {
+        lastReset = currentMillis;
+        resetJustNow = true;
+
+        OSCMessage msgReset("/car/reset");
+        msgReset.add(1);
+        Udp.beginPacket(unityIP, unityPort);
+        msgReset.send(Udp);
+        Udp.endPacket();
+        msgReset.empty();
     }
 
     // sensor data trasmission every 20ms

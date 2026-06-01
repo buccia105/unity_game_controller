@@ -20,7 +20,7 @@ unsigned long messageClearTime = 0;
 
 // initialization function
 void initDisplay() {
-    tft.init(240, 320);
+    tft.init(240, 240);
     tft.setRotation(2);
     tft.fillScreen(ST77XX_BLACK);
     

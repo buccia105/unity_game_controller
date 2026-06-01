@@ -7,6 +7,6 @@
 bool initOSC(); 
 
 // Processes sensor data every 20ms. Returns true if new data was sent this frame.
-bool processOSC(unsigned long currentMillis, float &outPitch, float &outRoll, bool &calibratedJustNow);
+bool processOSC(unsigned long currentMillis, float &outPitch, float &outRoll, bool &calibratedJustNow, bool &resetJustNow);
 
 #endif

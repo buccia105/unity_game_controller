@@ -27,10 +27,11 @@ void loop() {
     float pitch = 0.0f;
     float roll = 0.0f;
     bool justCalibrated = false;
+    bool resetJustNow = false;
 
     // running osc and sensor logic
     // returns true if enough time has passed and we are ready to fetch data
-    if (processOSC(currentMillis, pitch, roll, justCalibrated)) {
+    if (processOSC(currentMillis, pitch, roll, justCalibrated, resetJustNow)) {
         // redraw new values if there is new data
         updateDisplayValues(pitch, roll);
     }
