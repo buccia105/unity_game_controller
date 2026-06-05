@@ -26,7 +26,7 @@ float offsetY = 0.0f;
 
 const int calibrationTouchPin = D0; // calibration PIN
 const int resetTouchPin = D1; // run reset PIN
-const int touchThreshold = 20000;
+const int touchThreshold = 30000;
 
 // timing variables
 unsigned long previousMillis = 0; 
@@ -34,6 +34,11 @@ const long interval = 20;
 unsigned long lastTouchTime = 0;
 const long touchCooldown = 1000; 
 unsigned int lastReset = 0;
+
+// smoothing variables
+float oscSmoothPitch = 0.0f;
+float oscSmoothRoll = 0.0f;
+const float oscSmoothingFactor = 0.25f;
 
 // wi-fi connection
 bool initOSC() {
@@ -93,9 +98,16 @@ bool processOSC(unsigned long currentMillis, float &outPitch, float &outRoll, bo
 
         // mapping X Y to values between -1 and 1
         float rawGasBrake = calibratedX; 
-        float rawSteering = -calibratedY; 
-        outPitch = constrain(rawGasBrake / maxTiltAccel, -1.0f, 1.0f);
-        outRoll  = constrain(rawSteering / maxTiltAccel, -1.0f, 1.0f);
+        float rawSteering = -calibratedY;
+
+        float targetPitch = constrain(rawGasBrake / maxTiltAccel, -1.0f, 1.0f);
+        float targetRoll  = constrain(rawSteering / maxTiltAccel, -1.0f, 1.0f);
+
+        oscSmoothPitch = (oscSmoothPitch * (1.0f - oscSmoothingFactor)) + (targetPitch * oscSmoothingFactor);
+        oscSmoothRoll  = (oscSmoothRoll  * (1.0f - oscSmoothingFactor)) + (targetRoll  * oscSmoothingFactor);
+
+        outPitch = oscSmoothPitch;
+        outRoll  = oscSmoothRoll;
 
         // send osc steer
         OSCMessage msgSteer("/car/steer");
