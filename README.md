@@ -39,6 +39,8 @@ In the `PCB/` directory there are all the files needed to send to the pcb manufa
 
 * remember to solder 2 wires on `D0` and `D1` pins to be able to send a "reset" command via osc via pin `D1`, and calibrate the ADXL375 with the pin `D0`.
 
+* the screen is from waveshare [Link](https://www.waveshare.com/1.54inch-lcd-module.htm).
+
 ### SHOE:
 The shoe has been modified in Blender and Fusion360, so the size is fixed to 43EU, changing the size on the slicer or other software will end up breaking the dimentions for the hardware. The files should be printed as follows:
 
