@@ -45,8 +45,11 @@ The shoe has been modified in Blender and Fusion360, so the size is fixed to 43E
 * `SHOE_modified.stl`: needs to be printed in TPU95A, my suggetion is with support enabled, it will be a pain to remove them but the final result will be worth.
 * `electronics_boxes.step`: should be printed with PLA/PETG/ABS, a solid material to avoid mechanically stressing the electronics, enable supports only where is needed, like on the overhangs for the connectors holes.
 
+## Video tour (fully assembled)
+[![Tour](/IMAGES/IMG_1093.JPG)](https://youtube.com/shorts/1ewApq3uuPU?feature=share)
 
-[![Alt Text](/IMAGES/IMG_1093.JPG)](https://youtube.com/shorts/1ewApq3uuPU?feature=share)
+## Video DEMO
+[![DEMO](/IMAGES/IMG_1094.JPG)](https://youtube.com/shorts/eRb2sZXc62k?feature=share)
 
 
 
