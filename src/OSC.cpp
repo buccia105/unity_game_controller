@@ -27,6 +27,7 @@ float offsetY = 0.0f;
 const int calibrationTouchPin = D0; // calibration PIN
 const int resetTouchPin = D1; // run reset PIN
 const int touchThreshold = 30000;
+const int resetThreashold = 40000;
 
 // timing variables
 unsigned long previousMillis = 0; 
@@ -56,6 +57,7 @@ bool processOSC(unsigned long currentMillis, float &outPitch, float &outRoll, bo
 
     int touchValue = touchRead(calibrationTouchPin);
     int resetValue = touchRead(resetTouchPin);
+    Serial.printf("Calib(1): %d | Reset(D1): %d\n", touchValue, resetValue);
 
     // checks if touch value is over the threshold and for the cooldown to end
     if (touchValue > touchThreshold && (currentMillis - lastTouchTime > touchCooldown)) {
