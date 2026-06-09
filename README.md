@@ -56,4 +56,4 @@ The shoe has been modified in Blender and Fusion360, so the size is fixed to 43E
 
 
 ## 📝 License
-Distributed under the MIT License. See the `LICENSE` file for details.
+Distributed under the GPL-3.0 License. See the `LICENSE` file for details.
